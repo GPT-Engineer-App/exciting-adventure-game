@@ -5,6 +5,11 @@ import { FaPlay, FaPause, FaRedo } from "react-icons/fa";
 const Game = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [score, setScore] = useState(0);
+  const [rocketPosition, setRocketPosition] = useState(20); // Initial vertical position of the rocket
+
+  const moveRocketUp = () => {
+    setRocketPosition((prevPosition) => prevPosition + 30); // Move the rocket up by 30px
+  };
 
   const toast = useToast();
 
@@ -56,7 +61,7 @@ const Game = () => {
       <Text fontSize="2xl">React Rocket</Text>
       <Box w="full" h="500px" bg="gray.300" position="relative">
         {/* Game area */}
-        <Box w="50px" h="50px" bg="red.500" position="absolute" left={`${score % 300}px`} bottom="20px" borderRadius="full" />
+        <Box w="50px" h="50px" bg="blue.500" position="absolute" left={`${score % 300}px`} bottom={`${rocketPosition}px`} borderRadius="full" />
         {isPlaying ? (
           <Flex direction="column" align="center" justify="center" h="full">
             <Text color="white" p={2}>
@@ -71,13 +76,18 @@ const Game = () => {
           </Flex>
         )}
       </Box>
-      <Flex justify="space-between" w="full">
-        <Button leftIcon={<FaRedo />} onClick={resetGame} colorScheme="yellow">
-          Restart
+      <Flex direction="column" align="center" justify="center" w="full">
+        <Button leftIcon={<FaPlay />} onClick={moveRocketUp} colorScheme="green" mb={4}>
+          Move Rocket Up
         </Button>
-        <Button leftIcon={<FaPause />} onClick={pauseGame} colorScheme="blue">
-          Pause
-        </Button>
+        <Flex justify="space-between" w="full">
+          <Button leftIcon={<FaRedo />} onClick={resetGame} colorScheme="yellow">
+            Restart
+          </Button>
+          <Button leftIcon={<FaPause />} onClick={pauseGame} colorScheme="blue">
+            Pause
+          </Button>
+        </Flex>
       </Flex>
     </VStack>
   );
