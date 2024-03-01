@@ -54,12 +54,15 @@ const Game = () => {
   return (
     <VStack spacing={4} p={4}>
       <Text fontSize="2xl">React Rocket</Text>
-      <Box w="full" h="500px" bg="gray.700" position="relative">
+      <Box w="full" h="500px" bg="gray.300" position="relative">
         {/* Game area */}
+        <Box w="50px" h="50px" bg="red.500" position="absolute" left={`${score % 300}px`} bottom="20px" borderRadius="full" />
         {isPlaying ? (
-          <Text color="white" p={2}>
-            Score: {score}
-          </Text>
+          <Flex direction="column" align="center" justify="center" h="full">
+            <Text color="white" p={2}>
+              Score: {score}
+            </Text>
+          </Flex>
         ) : (
           <Flex align="center" justify="center" h="full">
             <Button leftIcon={<FaPlay />} onClick={startGame} colorScheme="green">
